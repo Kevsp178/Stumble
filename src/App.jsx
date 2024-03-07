@@ -50,9 +50,8 @@ function App() {
     let fail_on_status = "400%2C404%2C500-511";
     let url_starter = "https://";
     let encodedURL = encodeURIComponent(inputs.url);
-    return `${url_starter}api.apiflash.com/v1/urltoimage?access_key=${ACCESS_KEY}&url=${inputs.url}&format=${inputs.format}&width=${inputs.width}&height=${inputs.height}&no_cookie_banners=${inputs.no_cookie_banners}&no_ads=${inputs.no_ads}&wait_until=${wait_until}&response_type=${response_type}&fail_on_status=${fail_on_status}`;
+    return `${url_starter}api.apiflash.com/v1/urltoimage?access_key=${API_KEY}&url=${encodedURL}&format=${inputs.format}&width=${inputs.width}&height=${inputs.height}&no_cookie_banners=${inputs.no_cookie_banners}&no_ads=${inputs.no_ads}&wait_until=${wait_until}&response_type=${response_type}&fail_on_status=${fail_on_status}`;
   };
-
   const reset = () => {
     setInputs({
       url: "",
@@ -85,7 +84,6 @@ function App() {
   return (
     <div className='whole-page'>
       <h1>Build Your Own Screenshot! 📸</h1>
-
       <APIForm
         inputs={inputs}
         handleChange={(e) =>
@@ -125,7 +123,6 @@ function App() {
       <div className='container'>
         <Gallery images={prevImages} />
       </div>
-
       <br></br>
       <br />
     </div>
