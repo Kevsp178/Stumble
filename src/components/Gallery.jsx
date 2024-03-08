@@ -30,6 +30,10 @@ const DogImages = () => {
     fetchDogImages();
   }, []);
 
+  useEffect(() => {
+    console.log("Updated Gallery:", gallery);
+  }, [gallery]);
+
   const fetchDogInfo = async (imageId) => {
     try {
       const apiKey =
@@ -102,23 +106,20 @@ const DogImages = () => {
           />
           <div>
             <h3>Dog Info</h3>
-            <p>Breed: {gallery[currentImageIndex]?.name || "Unknown"}</p>
+            <p>
+              Breed: {images[currentImageIndex]?.breeds[0]?.name || "Unknown"}
+            </p>
             <p>
               Temperament:{" "}
-              {gallery[currentImageIndex]?.temperament || "Unknown"}
-            </p>
-            <p>Origin: {gallery[currentImageIndex]?.origin || "Unknown"}</p>
-            <p>
-              Life Span: {gallery[currentImageIndex]?.life_span || "Unknown"}
+              {images[currentImageIndex]?.breeds[0]?.temperament || "Unknown"}
             </p>
             <p>
-              Wikipedia:{" "}
-              <a
-                href={gallery[currentImageIndex]?.wikipedia_url}
-                target='_blank'
-                rel='noopener noreferrer'>
-                {gallery[currentImageIndex]?.name || "Unknown"} on Wikipedia
-              </a>
+              Origin:{" "}
+              {images[currentImageIndex]?.breeds[0]?.origin || "Unknown"}
+            </p>
+            <p>
+              Life Span:{" "}
+              {images[currentImageIndex]?.breeds[0]?.life_span || "Unknown"}
             </p>
           </div>
         </div>
@@ -135,15 +136,6 @@ const DogImages = () => {
               <p>Temperament: {dogInfo.temperament}</p>
               <p>Origin: {dogInfo.origin}</p>
               <p>Life Span: {dogInfo.life_span}</p>
-              <p>
-                Wikipedia:{" "}
-                <a
-                  href={dogInfo.wikipedia_url}
-                  target='_blank'
-                  rel='noopener noreferrer'>
-                  {dogInfo.name} on Wikipedia
-                </a>
-              </p>
             </div>
           ))}
         </div>
