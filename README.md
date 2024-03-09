@@ -28,7 +28,7 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
+
 <div>
     <a href="https://www.loom.com/share/399bfb0e669548429987ddea97c72cdf">
       <p>Editing Stumble/README.md at main · Kevsp178/Stumble - 9 March 2024 - Watch Video</p>
@@ -39,20 +39,25 @@ Here's a walkthrough of implemented user stories:
   </div>
 
 
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
+GIF created with loom.com
+
+Editing Stumble/README.md at main · Kevsp178/Stumble - 9 March 2024 - Watch Video
+
+
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I encontered all of the following challenges with this project
+- Finding an API to use
+- reading through and understanding how to apply the API
+- calling the API in my project for it to begin displaying the pictures
+- call a fetch for the information
+- further more the information was not matching with the pictures
+- call the images and information by .id in order for the fetching to brign the accurate information
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [1994] [Kevin Espjeo]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
