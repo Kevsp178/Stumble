@@ -62,10 +62,6 @@ const DogImages = () => {
     }
   };
 
-  const addToBanList = (breedName) => {
-    setBanList((prevBanList) => [...prevBanList, breedName]);
-  };
-
   const addToFeatureBanList = (feature) => {
     if (!featureBanList.some((ban) => ban.name === feature.name)) {
       setFeatureBanList((prevList) => [...prevList, feature]);
@@ -75,9 +71,11 @@ const DogImages = () => {
     }
   };
 
-  const clearFeatureBanList = () => {
-    setFeatureBanList([]);
-    console.log("Feature Ban List cleared");
+  const clearFeatureBanList = (feature) => {
+    setFeatureBanList((prevList) =>
+      prevList.filter((ban) => ban.name !== feature.name)
+    );
+    console.log(`Cleared feature: ${feature.name}`);
   };
 
   const shouldExcludeDog = (dogInfo) => {
@@ -113,11 +111,6 @@ const DogImages = () => {
         console.log("Fetching dog info for imageId:", imageId);
         const dogInfo = await fetchDogInfo(imageId);
 
-        console.log("Fetched dog info:", dogInfo);
-        console.log("Current Image Index:", currentImageIndex);
-        console.log("Next Index:", nextIndex);
-        console.log("Current Image ID:", imageId);
-
         // Check if the dog should be excluded based on the feature ban list
         if (!shouldExcludeDog(dogInfo)) {
           console.log("Dog is not excluded. Adding to gallery.");
@@ -137,9 +130,7 @@ const DogImages = () => {
               {
                 name: "Unknown",
                 temperament: "Unknown",
-                origin: "Unknown",
                 life_span: "Unknown",
-                wikipedia_url: "Unknown",
                 url: images[nextIndex]?.url,
                 id: imageId,
               },
@@ -163,57 +154,99 @@ const DogImages = () => {
 
   return (
     <div>
-      <h2>Dog Images</h2>
-      <button onClick={handleNextClick}>Next Dog</button>
-
-      {/* ... (your existing code) */}
-
+      <h2>Search for Dogs</h2>
       <div>
-        <h2>Gallery</h2>
-
-        {/* Display banned features */}
-        {featureBanList.length > 0 && (
+        {images.length > 0 && (
           <div>
-            <h3>Banned Features</h3>
-            <ul>
-              {featureBanList.map((feature, index) => (
-                <li key={index}>{`${feature.name}: ${feature.value}`}</li>
-              ))}
-            </ul>
-            <button onClick={clearFeatureBanList}>
-              Clear Feature Ban List
-            </button>
+            <img
+              className='search-dog'
+              src={images[currentImageIndex].url}
+              alt={`Dog ${images[currentImageIndex].id}`}
+            />
           </div>
         )}
+      </div>
+
+      <button onClick={handleNextClick}>Next Dog</button>
+
+      <div>
+        <h3>Banned Features</h3>
+        <div className='Banned'>
+          {/* Display banned features */}
+          {featureBanList.length > 0 && (
+            <div>
+              <ul>
+                {featureBanList.map((feature, index) => (
+                  <button
+                    key={index}
+                    onClick={() => clearFeatureBanList(feature)}>
+                    {`${feature.name}: ${feature.value}`}{" "}
+                  </button>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        <h2>Gallery</h2>
 
         <div className='gallery'>
           {gallery.map((dogInfo, index) => (
-            <div key={index}>
+            <div key={dogInfo.id}>
               {/* Display dog images and information from the gallery */}
-              <img src={images[index]?.url} alt={`Dog ${images[index]?.id}`} />
-              <h4>{dogInfo.name}</h4>
-              <p>Temperament: {dogInfo.temperament}</p>
-              <p>Life Span: {dogInfo.life_span}</p>
-              {/* Add a button to ban the feature */}
-              <button
-                onClick={() =>
-                  addToFeatureBanList({
-                    name: "life_span",
-                    value: dogInfo.life_span,
-                  })
-                }
-                disabled={featureBanList.some(
-                  (ban) => ban.name === "life_span"
-                )}>
-                {featureBanList.some((ban) => ban.name === "life_span")
-                  ? "Life Span Banned"
-                  : `Ban Life Span: ${dogInfo.life_span}`}
-              </button>
-              {/* You can add buttons for other features in a similar way */}
-              {/* Add a button to ban the breed */}
-              <button onClick={() => addToBanList(dogInfo.name)}>
-                Ban Breed
-              </button>
+              {images.find((img) => img.id === dogInfo.id) && (
+                <img
+                  className='dog-gallery'
+                  src={images.find((img) => img.id === dogInfo.id).url}
+                  alt={`Dog ${dogInfo.id}`}
+                />
+              )}
+              <div className='select'>
+                <button
+                  onClick={() =>
+                    addToFeatureBanList({
+                      name: "Breed",
+                      value: dogInfo.name,
+                    })
+                  }
+                  disabled={featureBanList.some(
+                    (ban) => ban.name === dogInfo.name
+                  )}>
+                  {featureBanList.some((ban) => ban.name === dogInfo.name)
+                    ? "Breed Banned"
+                    : `Breed: ${dogInfo.name}`}
+                </button>
+                <button
+                  onClick={() =>
+                    addToFeatureBanList({
+                      name: "Temperament",
+                      value: dogInfo.temperament,
+                    })
+                  }
+                  disabled={featureBanList.some(
+                    (ban) => ban.name === dogInfo.temperament
+                  )}>
+                  {featureBanList.some(
+                    (ban) => ban.name === dogInfo.temperament
+                  )
+                    ? "Temperament Banned"
+                    : `Temperament: ${dogInfo.temperament}`}
+                </button>
+                <button
+                  onClick={() =>
+                    addToFeatureBanList({
+                      name: "life_span",
+                      value: dogInfo.life_span,
+                    })
+                  }
+                  disabled={featureBanList.some(
+                    (ban) => ban.name === dogInfo.life_span
+                  )}>
+                  {featureBanList.some((ban) => ban.name === dogInfo.life_span)
+                    ? "Life Span Banned"
+                    : `Ban Life Span: ${dogInfo.life_span}`}
+                </button>
+              </div>
             </div>
           ))}
         </div>

@@ -5,7 +5,7 @@ import "./App.css"; // Make sure to import your CSS file
 const App = () => {
   return (
     <div className='whole-page'>
-      <h1>Explore Dog Images! 🐱</h1>
+      <h1>Explore Dog Images! </h1>
       <DogImages />
     </div>
   );

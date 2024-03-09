@@ -5,29 +5,37 @@
   text-align: center;
 }
 
-.image-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 5px;
+
+.Banned{
+    
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    background-color: gray;
+    padding-bottom: 50px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 20px;
+    align-items: center;
+    align-content: center;
+    max-width: 1300px;
+    max-height: 30px;
+    
 }
 
-.screenshot {
-  padding: 20px;
-  border-radius: 100px;
-  border: 10px solid #ccc;
-}
-
-.form-container {
+.gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
   background-color: gray;
   padding-bottom: 50px;
-  padding-top: 50px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   border-radius: 20px;
+  align-items: center;
+  align-content: center;
+  
 }
 
 .full {
@@ -39,20 +47,6 @@
 
 }
 
-.form {
-  background-color: lightgrey;
-  border-radius: 100px;
-  padding: 50px;
-
-}
-
-.textbox {
-  border-radius: 10px;
-  padding: 10px;
-  background-color: rgb(123, 241, 241);
-  color: red;
-}
-
 .container {
   padding: 20px;
   border-radius: 50px;
@@ -60,3 +54,24 @@
   background-color: gray;
   color: whitesmoke;
 }
+
+.dog-gallery{
+  max-width: 300px;
+  max-height: 250px;
+
+}
+
+.search-dog{
+  max-width: 500px;
+  max-height: 500px;
+}
+
+.select{
+  place-items: 10px;
+  padding: 5px;
+}
+
+.h1{
+  color: rgb(243, 12, 12);
+}
+
